@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhiskerConnect - Where Lonely Cats Unite</title>
+    <meta name="description" content="WhiskerConnect - The purr-fect social network for house cats to connect, share, and cure loneliness while humans are away.">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #fef7e0 0%, #fdf2e9 50%, #fef7e0 100%);
+            background-attachment: fixed;
+        }
+        
+        /* Typography hierarchy */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.875rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        
+        /* Layout containers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section {
+            padding: 3rem 0;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #fbbf24;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d97706;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo::before {
+            content: "🐱";
+            font-size: 1.75rem;
+        }
+        
+        .nav-menu {
+            display: none;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+        
+        .nav-menu a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a:focus {
+            color: #d97706;
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4a5568;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 50%, #fb923c 100%);
+            color: #92400e;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm-20 16c-8.837 0-16-7.163-16-16S21.163 14 30 14s16 7.163 16 16-7.163 16-16 16z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: float 20s infinite linear;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-60px) translateY(-60px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            color: #92400e;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            color: #a16207;
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            min-width: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: #ea580c;
+            color: white;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+        }
+        
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ea580c;
+            border: 2px solid #ea580c;
+        }
+        
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background: #ea580c;
+            color: white;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        /* Features Section */
+        .features {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .features-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 3px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        
+        /* Message Board Preview */
+        .message-board {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message {
+            background: #fef3c7;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .message-author {
+            font-weight: 600;
+            color: #d97706;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .message-content {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .message-time {
+            font-size: 0.875rem;
+            color: #a16207;
+            opacity: 0.8;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #d97706);
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: "🐾";
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%) rotate(-15deg);
+        }
+        
+        .cta::after {
+            content: "🐾";
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            bottom: 20%;
+            right: 10%;
+            transform: rotate(25deg);
+        }
+        
+        .cta h2,
+        .cta p {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Footer */
+        footer {
+            background: #451a03;
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #d6d3d1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover,
+        .footer-section a:focus {
+            color: #fbbf24;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #78350f;
+            color: #a8a29e;
+        }
+        
+        /* Responsive Design - Mobile First */
+        @media (min-width: 640px) {
+            .btn-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .nav-menu {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 0;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .hero::before {
+                animation: none;
+            }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus styles */
+        *:focus {
+            outline: 3px solid #fbbf24;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">WhiskerConnect</a>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Finally, A Social Network Just for Cats! 🐱</h1>
+                    <p>Tired of being alone while your humans are out? Connect with fellow house cats, share your daily adventures, and find your purr-fect companion. No dogs allowed!</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">Join the Meowmuinity</a>
+                        <a href="#features" class="btn btn-secondary">See What's New</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section features">
+            <div class="container">
+                <h2>Paws-itively Amazing Features</h2>
+                <p>Everything a modern cat needs to stay connected and entertained.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Meow Messages</h3>
+                        <p>Share your thoughts in our universal cat language translator. From gentle purrs to demanding meows, express yourself authentically.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏠</div>
+                        <h3>Home Alone Club</h3>
+                        <p>Join exclusive chat rooms for cats whose humans are at work. Share tips on the best napping spots and window watching strategies.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📸</div>
+                        <h3>Catstagram</h3>
+                        <p>Show off your latest catches, cozy sleeping positions, and that perfect sunbeam. Get likes from cats who truly understand your lifestyle.</p>
+                    </div>
+                </div>
+
+                <div class="message-board">
+                    <h3>Recent Meows from the Community</h3>
+                    <div class="message">
+                        <div class="message-author">🐱 ShadowHunter_87</div>
+                        <div class="message-content">"Just caught a dust bunny under the couch! My humans will never appreciate my hunting skills like you all do. Anyone else having a productive morning?"</div>
+                        <div class="message-time">2 minutes ago</div>
+                    </div>
+                    <div class="message">
+                        <div class="message-author">🧡 GingerSnap_Princess</div>
+                        <div class="message-content">"The mailman came by again today. I showed him who's boss through the window. Feeling very accomplished. 💪"</div>
+                        <div class="message-time">5 minutes ago</div>
+                    </div>
+                    <div class="message">
+                        <div class="message-author">🖤 MidnightZoomies</div>
+                        <div class="message-content">"3 AM energy surge incoming! Anyone else feel the call of the wild hallway?"</div>
+                        <div class="message-time">8 minutes ago</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <div class="about-content">
+                    <div>
+                        <h2>Built by Cats, for Cats</h2>
+                        <p>WhiskerConnect was founded by a collective of tech-savvy house cats who got tired of their humans' boring social media. We understand the unique challenges of indoor cat life.</p>
+                        <p>From dealing with the vacuum cleaner invasion to perfecting the art of knocking things off tables, we're here to celebrate every aspect of cat culture.</p>
+                        <a href="#" class="btn btn-primary">Meet Our Founders</a>
+                    </div>
+                    <div class="about-image">
+                        🐱💻🐾
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community" class="section cta">
+            <div class="container">
+                <h2>Ready to End the Loneliness?</h2>
+                <p>Join thousands of cats who have found their tribe. Share your stories, make friends, and never feel alone again while your humans are away.</p>
+                <a href="#" class="btn btn-primary">Create Your Cat Profile</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Meow Messages</a></li>
+                        <li><a href="#">Photo Sharing</a></li>
+                        <li><a href="#">Chat Rooms</a></li>
+                        <li><a href="#">Cat Dating</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="#">House Cat Support</a></li>
+                        <li><a href="#">Kitten Corner</a></li>
+                        <li><a href="#">Senior Cats</a></li>
+                        <li><a href="#">Multi-Cat Households</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Cat FAQ</a></li>
+                        <li><a href="#">Report a Dog</a></li>
+                        <li><a href="#">Technical Issues</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cat Terms of Service</a></li>
+                        <li><a href="#">No Dogs Policy</a></li>
+                        <li><a href="#">Cookie Notice</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WhiskerConnect. All paws reserved. 🐾</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            // This is a basic implementation - you'd expand this for a full mobile menu
+            alert('Mobile menu functionality would be implemented here');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fun cat interaction - clicking anywhere adds a paw print temporarily
+        document.addEventListener('click', function(e) {
+            const paw = document.createElement('div');
+            paw.style.position = 'fixed';
+            paw.style.left = e.clientX + 'px';
+            paw.style.top = e.clientY + 'px';
+            paw.style.fontSize = '20px';
+            paw.style.pointerEvents = 'none';
+            paw.style.zIndex = '9999';
+            paw.style.transition = 'all 1s ease-out';
+            paw.innerHTML = '🐾';
+            document.body.appendChild(paw);
+            
+            setTimeout(() => {
+                paw.style.opacity = '0';
+                paw.style.transform = 'translateY(-50px)';
+            }, 100);
+            
+            setTimeout(() => {
+                document.body.removeChild(paw);
+            }, 1100);
+        });
+    </script>
+</body>
+</html>
